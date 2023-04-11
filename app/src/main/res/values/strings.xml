@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">studentMarketplace</string>
+    <string name="price_format">%1$.2f $</string>
+
+</resources>

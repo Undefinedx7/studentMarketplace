@@ -9,6 +9,10 @@ class ApiClientCallback {
 
     class ApiError(val message: String)
 
-    data class ApiResponse(val data: Any?, val message: String, val success: Boolean)
+    data class ApiResponse(val data: Any?, val message: String, val success: Boolean){
+        fun isSuccess(): Boolean {
+            return success
+        }
+    }
 
 }
