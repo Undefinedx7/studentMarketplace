@@ -1,12 +1,12 @@
 package com.example.studentmarketplace;
-import com.example.studentmarketplace.com.example.studentmarketplace.ApiClientCallback;
-import com.example.studentmarketplace.com.example.studentmarketplace.ApiClientCallback.ApiResponse;
-
 import android.content.Context;
+import android.util.Log;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import com.example.studentmarketplace.ApiClientCallback.*;
+
+//import retrofit2.Call;
+//import retrofit2.Callback;
+//import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Field;
@@ -14,8 +14,8 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
 
-public class ApiClient {
-    private static final String BASE_URL = "http://localhost:3000/";
+/*public class ApiClient {
+    private static final String BASE_URL = "http://10.0.2.2:3000";
     private static Retrofit retrofit;
     private static ApiClient instance;
 
@@ -43,27 +43,37 @@ public class ApiClient {
                 .build();
     }
 
-    public void authenticateUser(String email, String password, ApiClientCallback.ApiResponseListener listener) {
+    public void authenticateUser(String email, String password, ApiResponseListener listener) {
         AuthApi authApi = getRetrofitInstance().create(AuthApi.class);
         Call<ApiResponse> call = authApi.authenticate(email, password);
-        call.enqueue(new Callback<ApiClientCallback.ApiResponse>() {
+
+        Log.d("ApiClient", "Request: " + call.request().toString());
+
+        call.enqueue(new Callback<ApiResponse>() {
             @Override
-            public void onResponse(Call<ApiClientCallback.ApiResponse> call, Response<ApiClientCallback.ApiResponse> response) {
+            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                 if (response.isSuccessful()) {
-                    ApiClientCallback.ApiResponse apiResponse = response.body();
-                    if (apiResponse != null && apiResponse.isSuccess()) {
-                        listener.onSuccess(apiResponse);
+                    ApiResponse apiResponse = response.body();
+                    if (apiResponse != null) {
+                        Log.d("ApiClient", "Response: " + apiResponse.toString());
+                        if (apiResponse.isSuccess()) {
+                            listener.onSuccess(apiResponse);
+                        } else {
+                            listener.onError(new ApiClientCallback.ApiError(apiResponse.getMessage() != null ? apiResponse.getMessage() : "Unknown error"));
+                        }
                     } else {
-                        listener.onError(new ApiClientCallback.ApiError(apiResponse != null ? apiResponse.getMessage() : "Unknown error"));
+                        listener.onError(new ApiClientCallback.ApiError("Response body is null"));
                     }
                 } else {
                     listener.onError(new ApiClientCallback.ApiError("Failed to authenticate user"));
                 }
             }
 
+
             @Override
             public void onFailure(Call<ApiResponse> call, Throwable t) {
-                listener.onError(new ApiClientCallback.ApiError(t.getMessage() != null ? t.getMessage() : "Unknown error"));
+                Log.e("ApiClient", "Error authenticating user: " + t.getMessage());
+                listener.onError(new ApiError(t.getMessage() != null ? t.getMessage() : "Unknown error"));
             }
         });
     }
@@ -76,6 +86,8 @@ public class ApiClient {
                 @Field("password") String password
         );
     }
+
+
 
     public interface ItemApi {
         @FormUrlEncoded
@@ -112,5 +124,138 @@ public class ApiClient {
             }
         });
     }
+
+}
+*/
+import okhttp3.*;
+import org.json.*;
+
+import java.io.IOException;
+
+
+public class ApiClient {
+    String json = "{\"key\": \"value\"}";
+    RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), json);
+    private static final String BASE_URL = "http://10.0.2.2:3000";
+
+    private static ApiClient instance;
+    private final OkHttpClient client;
+
+    private ApiClient() {
+        client = new OkHttpClient();
+    }
+
+    public static synchronized ApiClient getInstance() {
+        if (instance == null) {
+            instance = new ApiClient();
+        }
+        return instance;
+    }
+
+    public void authenticateUser(String email, String password, final ApiResponseListener listener) {
+        JSONObject requestBody = new JSONObject();
+        try {
+            requestBody.put("email", email);
+            requestBody.put("password", password);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            listener.onError(new ApiError("Error creating JSON request body"));
+            return;
+        }
+
+        RequestBody body = RequestBody.create(MediaType.parse("application/json"), requestBody.toString());
+
+        Request request = new Request.Builder()
+                .url(BASE_URL + "/auth")
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+                listener.onError(new ApiError("Error connecting to server"));
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    listener.onError(new ApiError("Authentication failed: " + response.message()));
+                    return;
+                }
+
+                try {
+                    JSONObject responseBody = new JSONObject(response.body().string());
+
+                    boolean success = responseBody.getBoolean("success");
+                    String message = responseBody.getString("message");
+
+                    if (success) {
+                        JSONObject data = responseBody.getJSONObject("data");
+
+                        int id = data.getInt("id");
+                        String name = data.getString("name");
+                        String token = data.getString("token");
+
+                        listener.onSuccess(new ApiResponse(id, name, email, token));
+                    } else {
+                        listener.onError(new ApiError(message));
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    listener.onError(new ApiError("Error parsing JSON response"));
+                }
+            }
+        });
+    }
+
+    public interface ApiResponseListener {
+        void onSuccess(ApiResponse response);
+        void onError(ApiError error);
+    }
+
+    public static class ApiError {
+        private final String message;
+
+        public ApiError(String message) {
+            this.message = message;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+    }
+
+    public static class ApiResponse {
+        private final int id;
+        private final String name;
+        private final String email;
+        private final String token;
+
+        public ApiResponse(int id, String name, String email, String token) {
+            this.id = id;
+            this.name = name;
+            this.email = email;
+            this.token = token;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public String getToken() {
+            return token;
+        }
+    }
+
 
 }

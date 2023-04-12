@@ -1,4 +1,4 @@
-package com.example.studentmarketplace.com.example.studentmarketplace
+package com.example.studentmarketplace
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,10 +8,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.studentmarketplace.ApiClient
-import com.example.studentmarketplace.com.example.studentmarketplace.ApiClientCallback.*
-import com.example.studentmarketplace.MainActivity
-import com.example.studentmarketplace.R
+import com.example.studentmarketplace.ApiClient.ApiError
+import com.example.studentmarketplace.ApiClient.ApiResponse
+import com.example.studentmarketplace.ApiClient.ApiResponseListener
 
 class LoginActivity : AppCompatActivity() {
 
@@ -41,19 +40,26 @@ class LoginActivity : AppCompatActivity() {
                 return@OnClickListener
             }
 
-            // Make API request to authenticate user
-            val apiClient = ApiClient.getInstance(this@LoginActivity)
-            apiClient.authenticateUser(email, password, object : ApiResponseListener {
+            ApiClient.getInstance().authenticateUser(email, password, object : ApiResponseListener {
                 override fun onSuccess(response: ApiResponse) {
                     // If login is successful, start MainActivity
-                    startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                    finish()
+                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                    startActivity(intent)
                 }
 
-                override fun onError(error: ApiError) {
-                    Toast.makeText(this@LoginActivity, error.message, Toast.LENGTH_SHORT).show()
+                override fun onError(error: ApiClient.ApiError) {
+                    runOnUiThread {
+                        Toast.makeText(
+                            this@LoginActivity,
+                            error.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
             })
+
+
+
         })
     }
 }

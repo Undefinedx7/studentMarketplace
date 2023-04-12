@@ -1,6 +1,7 @@
 package com.example.studentmarketplace;
 
 import android.Manifest;
+import com.example.studentmarketplace.ApiClientCallback.*;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -14,8 +15,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.studentmarketplace.com.example.studentmarketplace.ApiClientCallback;
-import com.example.studentmarketplace.com.example.studentmarketplace.ApiClientCallback.ApiResponse;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -58,11 +57,11 @@ public class AddItemActivity extends AppCompatActivity {
         String price = etPrice.getText().toString();
         String category = etCategory.getSelectedItem().toString();
 
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.ACCESS_FINE_LOCATION }, PERMISSION_REQUEST_LOCATION);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_REQUEST_LOCATION);
             return;
-
         }
+
         fusedLocationClient.getLastLocation()
                 .addOnSuccessListener(this, new OnSuccessListener<Location>() {
                     @Override
@@ -73,9 +72,9 @@ public class AddItemActivity extends AppCompatActivity {
                             double longitude = location.getLongitude();
 
                             // Call the API to add the item with the retrieved location
-                            ApiClient apiClient = ApiClient.getInstance(AddItemActivity.this);
-                            apiClient.addItem(title, description, Double.parseDouble(price), category, new ApiClientCallback.ApiResponseListener() {
-                               // latitude, longitude,
+                            ApiItem apiItem = ApiItem.getInstance(AddItemActivity.this);
+
+                            apiItem.addItem(title, description, Double.parseDouble(price), category, new ApiClientCallback.ApiResponseListener() {
                                 @Override
                                 public void onSuccess(ApiResponse response) {
                                     Toast.makeText(AddItemActivity.this, response.getMessage(), Toast.LENGTH_SHORT).show();
@@ -95,21 +94,5 @@ public class AddItemActivity extends AppCompatActivity {
             Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show();
             return;
         }
-
-
-
-        ApiClient apiClient = ApiClient.getInstance(this);
-        apiClient.addItem(title, description, Double.parseDouble(price), category, new ApiClientCallback.ApiResponseListener() {
-            @Override
-            public void onSuccess(ApiResponse response) {
-                Toast.makeText(AddItemActivity.this, response.getMessage(), Toast.LENGTH_SHORT).show();
-                finish();
-            }
-
-            @Override
-            public void onError(ApiClientCallback.ApiError error) {
-                Toast.makeText(AddItemActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 }

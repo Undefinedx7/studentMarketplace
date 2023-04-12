@@ -22,7 +22,7 @@
         >
 
         <activity
-            android:name=".com.example.studentmarketplace.LoginActivity"
+            android:name=".LoginActivity"
             android:label="Login Screen"
             android:exported="true">
             <intent-filter>
@@ -30,6 +30,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
 
 
     </application>
