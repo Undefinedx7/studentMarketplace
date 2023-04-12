@@ -1,5 +1,7 @@
 package com.example.studentmarketplace;
 
+import android.Manifest;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
@@ -12,7 +14,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.studentmarketplace.ApiClientCallback.ApiResponse;
+import com.example.studentmarketplace.com.example.studentmarketplace.ApiClientCallback;
+import com.example.studentmarketplace.com.example.studentmarketplace.ApiClientCallback.ApiResponse;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -71,7 +74,8 @@ public class AddItemActivity extends AppCompatActivity {
 
                             // Call the API to add the item with the retrieved location
                             ApiClient apiClient = ApiClient.getInstance(AddItemActivity.this);
-                            apiClient.addItem(title, description, Double.parseDouble(price), category, latitude, longitude, new ApiClientCallback.ApiResponseListener() {
+                            apiClient.addItem(title, description, Double.parseDouble(price), category, new ApiClientCallback.ApiResponseListener() {
+                               // latitude, longitude,
                                 @Override
                                 public void onSuccess(ApiResponse response) {
                                     Toast.makeText(AddItemActivity.this, response.getMessage(), Toast.LENGTH_SHORT).show();

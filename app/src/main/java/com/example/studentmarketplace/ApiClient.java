@@ -1,5 +1,6 @@
 package com.example.studentmarketplace;
-import com.example.studentmarketplace.ApiClientCallback.ApiResponse;
+import com.example.studentmarketplace.com.example.studentmarketplace.ApiClientCallback;
+import com.example.studentmarketplace.com.example.studentmarketplace.ApiClientCallback.ApiResponse;
 
 import android.content.Context;
 
