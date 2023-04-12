@@ -10,11 +10,12 @@
 
     <application
 
+        android:usesCleartextTraffic="true"
 
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.StudentMarketplace"
@@ -22,7 +23,7 @@
         >
 
         <activity
-            android:name=".com.example.studentmarketplace.LoginActivity"
+            android:name=".LoginActivity"
             android:label="Login Screen"
             android:exported="true">
             <intent-filter>
@@ -31,6 +32,16 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".SignUpActivity"/>
 
     </application>
 </manifest>

@@ -2,5 +2,9 @@
     <string name="app_name">studentMarketplace</string>
     <string name="price_format">%1$.2f $</string>
     <string name="select_category" />
+    <string name="register">register</string>
+    <string name="confirm_password">confirm password</string>
+    <string name="password">enter password</string>
+    <string name="email_address">email adress</string>
 
 </resources>
