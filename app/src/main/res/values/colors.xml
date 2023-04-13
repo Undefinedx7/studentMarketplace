@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="primary">#F15C18</color>
+    <color name="background">#F9F9F9</color>
+    <color name="backgroundAd">#FFFFFFFF</color>
+    <color name="error">#F01F0E</color>
+    <color name="success">#2AA952</color>
+    <color name="mainText">#222222</color>
+    <color name="textAd">#9B9B9B</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -7,7 +14,6 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="primary">#69C6B7</color>
     <color name="on_primary">#000000</color>
     <color name="secondary">#3E3E3E</color>
     <color name="on_secondary">#FFFFFF</color>

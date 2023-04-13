@@ -6,5 +6,15 @@
     <string name="confirm_password">confirm password</string>
     <string name="password">enter password</string>
     <string name="email_address">email adress</string>
+    <string name="email">Email</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
+    <string name="error_message">Error</string>
+    <string name="forgot_password_title">Forgot Password</string>
+    <string name="forgot_password_success_message">Instructions to reset your password have been sent to your email.</string>
+    <string name="forgot_password_failure_message">Failed to send password reset instructions. Please try again later.</string>
+    <string name="email_hint">Email</string>
+    <string name="reset_password_button">Reset Password</string>
 
 </resources>
