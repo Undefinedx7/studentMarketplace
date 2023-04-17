@@ -24,12 +24,12 @@ class MainActivity : AppCompatActivity() {
         val email = intent.getStringExtra("email")
 
         // Display a welcome message with the user's information
-        val welcomeTextView = findViewById<TextView>(R.id.welcome_text_view)
+        /*val welcomeTextView = findViewById<TextView>(R.id.welcome_text_view)
         welcomeTextView.text = String.format(
             "Welcome %s! Your user ID is %s and your email is %s.",
             username,
             userId,
             email
-        )
+        )*/
     }
 }
