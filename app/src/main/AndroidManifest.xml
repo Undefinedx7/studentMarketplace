@@ -16,21 +16,27 @@
         android:theme="@style/Theme.StudentMarketplace"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-        <activity
-            android:name=".LoginActivity"
-            android:theme="@style/Theme.Design.Light.NoActionBar"
-            android:exported="false" />
+
         <activity
             android:name=".activity.SplashActivity"
             android:exported="true"
             android:label="Login Screen"
             android:theme="@style/Theme.Design.Light.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"
+                    android:theme="@style/Theme.Design.Light.NoActionBar"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"
+                    android:theme="@style/Theme.Design.Light.NoActionBar"/>
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".LoginActivity"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
+            android:exported="false" >
+        </activity>
+
         <activity
             android:name=".MainActivity"
             android:exported="false"
@@ -38,7 +44,16 @@
         </activity>
         <activity
             android:name=".SignUpActivity"
-            android:theme="@style/Theme.Design.Light.NoActionBar" />
+            android:theme="@style/Theme.Design.Light.NoActionBar" >
+</activity>
+        <activity
+            android:name=".ForgotPasswordActivity"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
+            android:exported="false" >
+
+        </activity>
     </application>
+
+
 
 </manifest>

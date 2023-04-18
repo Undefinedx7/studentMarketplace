@@ -80,9 +80,6 @@
 
             />
 
-
-
-
         <TextView
             android:id="@+id/forgottenPassTv"
             android:layout_width="match_parent"
@@ -90,6 +87,7 @@
             android:layout_marginTop="10dp"
             android:gravity="right"
             android:text="Forgotten Password?"
+            android:clickable="true"
             android:textColor="@color/mainText"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
