@@ -1,4 +1,4 @@
-package com.example.studentmarketplace;
+package com.example.studentmarketplace.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +21,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.studentmarketplace.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
