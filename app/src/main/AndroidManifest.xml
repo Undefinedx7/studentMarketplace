@@ -17,17 +17,23 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".LoginActivity"
-            android:theme="@style/Theme.Design.Light.NoActionBar"
-            android:exported="false" />
+            android:name=".profileActivity"
+            android:exported="false"
+            android:label="@string/title_activity_profile"
+            android:theme="@style/Theme.StudentMarketplace.NoActionBar" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
             android:name=".activity.SplashActivity"
             android:exported="true"
             android:label="Login Screen"
             android:theme="@style/Theme.Design.Light.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"
-                    android:theme="@style/Theme.Design.Light.NoActionBar"/>
+                <action
+                    android:name="android.intent.action.MAIN"
+                    android:theme="@style/Theme.Design.Light.NoActionBar" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
@@ -35,20 +41,14 @@
         <activity
             android:name=".activity.MainActivity"
             android:exported="false"
-            android:theme="@style/Theme.Design.Light.NoActionBar">
-        </activity>
+            android:theme="@style/Theme.Design.Light.NoActionBar"></activity>
         <activity
             android:name=".activity.SignUpActivity"
-            android:theme="@style/Theme.Design.Light.NoActionBar"
-            android:name=".SignUpActivity"
-            android:theme="@style/Theme.Design.Light.NoActionBar" >
-</activity>
+            android:theme="@style/Theme.Design.Light.NoActionBar"></activity>
         <activity
             android:name=".ForgotPasswordActivity"
-            android:theme="@style/Theme.Design.Light.NoActionBar"
-            android:exported="false" >
-
-        </activity>
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar"></activity>
     </application>
 
 </manifest>

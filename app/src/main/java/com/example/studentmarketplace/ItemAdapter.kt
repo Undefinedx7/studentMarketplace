@@ -1,4 +1,4 @@
-package com.example.studentmarketplace.com.example.studentmarketplace
+package com.example.studentmarketplace
 
 import android.view.LayoutInflater
 import android.view.View

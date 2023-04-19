@@ -19,6 +19,9 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 
+import android.Manifest;
+
+
 public class AddItemActivity extends AppCompatActivity {
 
     private EditText etTitle, etDescription, etPrice;
