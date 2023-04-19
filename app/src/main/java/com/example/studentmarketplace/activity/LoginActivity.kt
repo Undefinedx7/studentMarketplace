@@ -1,4 +1,4 @@
-package com.example.studentmarketplace
+package com.example.studentmarketplace.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,8 +9,10 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.studentmarketplace.ApiClient
 import com.example.studentmarketplace.ApiClient.ApiResponse
 import com.example.studentmarketplace.ApiClient.ApiResponseListener
+import com.example.studentmarketplace.R
 
 class LoginActivity : AppCompatActivity() {
 

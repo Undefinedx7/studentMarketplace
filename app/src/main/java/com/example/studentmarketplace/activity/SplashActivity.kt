@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.WindowManager
-import com.example.studentmarketplace.LoginActivity
 import com.example.studentmarketplace.R
 
 class SplashActivity : AppCompatActivity() {
