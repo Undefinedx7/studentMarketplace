@@ -52,6 +52,9 @@ import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import android.Manifest;
+
+
 public class AddItemActivity extends AppCompatActivity {
 
     private static final int PICK_IMAGE_REQUEST = 1;
