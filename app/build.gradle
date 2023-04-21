@@ -52,7 +52,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     implementation 'com.google.android.gms:play-services-location:18.0.0'
-
     implementation 'com.android.volley:volley:1.1.1' // only to be used on direct conn with db
     implementation 'com.android.volley:volley:1.2.1'
 
