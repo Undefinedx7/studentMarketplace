@@ -1,5 +1,8 @@
 package com.example.studentmarketplace;
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.example.studentmarketplace.ApiClientCallback.*;
@@ -196,6 +199,8 @@ public class ApiClient {
                         int id = data.getInt("id");
                         String name = data.getString("name");
                         String token = data.getString("token");
+
+
 
                         listener.onSuccess(new ApiResponse(id, name, email, token));
                     } else {

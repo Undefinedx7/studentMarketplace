@@ -59,9 +59,17 @@ class LoginActivity : AppCompatActivity() {
 
             ApiClient.getInstance().authenticateUser(email, password, object : ApiResponseListener {
                 override fun onSuccess(response: ApiResponse) {
+
+                    val sharedPreferences = getSharedPreferences("my_app_preferences", MODE_PRIVATE)
+                    val editor = sharedPreferences.edit()
+                    editor.putString("id", response.id.toString())
+                    editor.apply()
+
                     // If login is successful, start MainActivity
                     val intent = Intent(this@LoginActivity, MainActivity::class.java)
                     startActivity(intent)
+
+
                 }
 
                 override fun onError(error: ApiClient.ApiError) {
