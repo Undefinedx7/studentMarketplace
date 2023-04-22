@@ -20,10 +20,10 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.action_home -> replaceFragment(HomeFragment())
-                R.id.action_profile -> replaceFragment(profileFragment())
+               // R.id.action_profile -> replaceFragment(profileFragment())
                 R.id.action_favorites -> replaceFragment(FavoriteFragment())
                 R.id.action_category -> replaceFragment(CategoryFragment())
-                R.id.action_sell -> replaceFragment(sellFragment())
+                R.id.action_sell -> replaceFragment(SellFragment())
                 else ->{
 
                 }
