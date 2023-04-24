@@ -2,14 +2,19 @@ package com.example.studentmarketplace;
 
 import static android.content.ContentValues.TAG;
 
-import  com.example.studentmarketplace.*;
+import static androidx.constraintlayout.motion.widget.Debug.getLocation;
+
+import com.example.studentmarketplace.*;
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,12 +29,16 @@ import retrofit2.Call;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.collection.ArraySet;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studentmarketplace.ApiClientCallback;
 import com.example.studentmarketplace.R;
+import com.example.studentmarketplace.activity.MainActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -39,7 +48,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,9 +71,8 @@ public class AddItemActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
 
     private List<String> mImageUrls = new ArrayList<>();
+    private List<File> mImageFiles = new ArrayList<>();
     private ImageAdapter mAdapter;
-
-
 
 
     private static final String CATEGORIES_URL = "http://10.0.2.2:3000/categories/";
@@ -73,15 +83,18 @@ public class AddItemActivity extends AppCompatActivity {
             .build();
 
     private Spinner categorySpinner;
+    private Spinner statusSpinner;
 
     String url = "http://10.0.2.2:3000/products";
 
 
     private EditText etTitle, etDescription, etPrice;
-    private Spinner etCategory;
+    private Spinner etCategory, etStatus;
 
     private FusedLocationProviderClient fusedLocationClient;
     private Button btnAddItem;
+
+    private double latitude, longitude;
 
     private static final int PERMISSION_REQUEST_LOCATION = 1;
 
@@ -90,9 +103,12 @@ public class AddItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sellitem_activity);
 
+
+        statusSpinner = findViewById(R.id.status_spinner);
         categorySpinner = findViewById(R.id.category_spinner);
 
         loadCategories();
+        loadStatus();
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -100,14 +116,18 @@ public class AddItemActivity extends AppCompatActivity {
         etDescription = findViewById(R.id.description_edit_text);
         etPrice = findViewById(R.id.price_edit_text);
         etCategory = findViewById(R.id.category_spinner);
-
+        etStatus = findViewById(R.id.status_spinner);
         btnAddItem = findViewById(R.id.add_item_button);
 
 
         btnAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addItem();
+                try {
+                    addItem();
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
         Button addPhotoButton = findViewById(R.id.add_photo_button);
@@ -135,114 +155,78 @@ public class AddItemActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK) {
+
             if (data.getClipData() != null) {
                 int count = data.getClipData().getItemCount();
                 for (int i = 0; i < count; i++) {
                     Uri imageUri = data.getClipData().getItemAt(i).getUri();
-                    mImageUrls.add(imageUri.toString());
+                    try {
+                        InputStream inputStream = getContentResolver().openInputStream(imageUri);
+                        long timestamp = System.currentTimeMillis();
+                        File file = new File(getCacheDir(), "image" + timestamp + ".jpg");
+                        FileOutputStream outputStream = new FileOutputStream(file);
+                        byte[] buffer = new byte[4 * 1024];
+                        int read;
+                        while ((read = inputStream.read(buffer)) != -1) {
+                            outputStream.write(buffer, 0, read);
+                        }
+                        outputStream.flush();
+                        outputStream.close();
+                        mImageFiles.add(file);
+                        mImageUrls.add(file.getAbsolutePath());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     mAdapter.notifyDataSetChanged();
                 }
             } else if (data.getData() != null) {
                 Uri imageUri = data.getData();
-                mImageUrls.add(imageUri.toString());
+                try {
+                    InputStream inputStream = getContentResolver().openInputStream(imageUri);
+                    long timestamp = System.currentTimeMillis();
+                    File file = new File(getCacheDir(), "image" + timestamp + ".jpg");
+                    FileOutputStream outputStream = new FileOutputStream(file);
+                    byte[] buffer = new byte[4 * 1024];
+                    int read;
+                    while ((read = inputStream.read(buffer)) != -1) {
+                        outputStream.write(buffer, 0, read);
+                    }
+                    outputStream.flush();
+                    outputStream.close();
+                    mImageFiles.add(file);
+                    mImageUrls.add(file.getAbsolutePath());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 mAdapter.notifyDataSetChanged();
             }
         }
     }
 
-    private void addItem() {
+    private void addItem() throws JSONException {
 
-        String title = etTitle.getText().toString();
-        String description = etDescription.getText().toString();
-        String price = etPrice.getText().toString();
-        String category = etCategory.getSelectedItem().toString();
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_REQUEST_LOCATION);
-            return;
-        }
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        String userId = sharedPreferences.getString("id", null);
 
-        fusedLocationClient.getLastLocation()
-                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        SharedPreferences sharedPreferences = getSharedPreferences("my_app_preferences", MODE_PRIVATE);
-                        String id = sharedPreferences.getString("id", null);
-                        if (location != null) {
-                            // User's location is retrieved successfully
-                            double latitude = location.getLatitude();
-                            double longitude = location.getLongitude();
 
-                            try {
-                                // Make a POST request to the server to retrieve user information
-                                OkHttpClient client = new OkHttpClient();
-                                Request request = new Request.Builder()
-                                        .url("http://10.0.2.2:3000/user_info")
-                                        .addHeader("Authorization", "Bearer " + id)
-                                        .get()
-                                        .build();
+        double latitude = 47.620867;
+        double longitude = -65.674760;
 
-                                Response response = client.newCall(request).execute();
-                                String responseBody = response.body().string();
+        Activity mActivity = AddItemActivity.this;
 
-                                // Get the user ID from the server response
-                                String userId = id ;
+        AddProductTask addProductTask = new AddProductTask(AddItemActivity.this, mActivity, etTitle, etDescription, etPrice, etCategory, btnAddItem, etStatus, sharedPreferences, latitude, longitude, mImageFiles);
+        addProductTask.execute();
 
-                                // Create the product JSON object
-                                JSONObject product = new JSONObject();
-                                product.put("name", title);
-                                product.put("price", Double.parseDouble(price));
-                                product.put("description", description);
-                                product.put("userId", userId);
-                                product.put("location", latitude + "," + longitude);
-                                product.put("category", category);
+        mImageUrls.clear();
+        //mImageFiles.clear();
+        mAdapter.notifyDataSetChanged();
 
-                                // Add images to the request body
-                                List<File> files = new ArrayList<>(); // replace with actual list of image files
-                                MultipartBody.Builder builder = new MultipartBody.Builder();
-                                builder.setType(MultipartBody.FORM);
 
-                                for (File file : files) {
-                                    builder.addFormDataPart("images", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
-                                }
-
-                                // Add product data to the request body
-                                builder.addFormDataPart("data", product.toString());
-
-                                // Make a POST request to the server
-                                Request request2 = new Request.Builder()
-                                        .url(url)
-                                        .post(builder.build())
-                                        .build();
-
-                                try (Response response2 = client.newCall(request).execute()) {
-                                    if (response2.isSuccessful()) {
-                                        responseBody = response2.body().string();
-                                        Gson gson = new Gson();
-                                        ApiClientCallback.ApiResponse apiResponse = gson.fromJson(responseBody, ApiClientCallback.ApiResponse.class);
-                                        // Handle the successful response
-                                    } else {
-                                        String errorBody = response2.body().string();
-                                        Gson gson = new Gson();
-                                        ApiClientCallback.ApiError apiError = gson.fromJson(errorBody, ApiClientCallback.ApiError.class);
-                                        // Handle the error response
-                                    }
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                                // Handle the JSON error
-                            } catch (IOException e) {
-                                throw new RuntimeException(e);
-                            }
-                        } else {
-                            // Handle the case where the location is null
-                        }
-                    }
-                });
     }
+
+
+
     private void loadCategories() {
         // Create instance of ApiService using Retrofit
         ApiInterface apiInterface = retrofit.create(ApiInterface.class);
@@ -268,6 +252,35 @@ public class AddItemActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<String>> call, Throwable t) {
                 Log.e(TAG, "Failed to load categories: " + t.getMessage());
+            }
+        });
+    }
+
+    private void loadStatus() {
+        // Create instance of ApiService using Retrofit
+        ApiInterface apiInterface = retrofit.create(ApiInterface.class);
+
+        // Call the API
+        Call<List<String>> call = apiInterface.getStatus();
+        call.enqueue(new retrofit2.Callback<List<String>>() {
+            @Override
+            public void onResponse(Call<List<String>> call, retrofit2.Response<List<String>> response) {
+                if (response.isSuccessful()) {
+                    // Update spinner with categories data
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(AddItemActivity.this,
+                            android.R.layout.simple_spinner_dropdown_item, response.body());
+                    statusSpinner.setAdapter(adapter);
+                } else {
+                    // Handle error
+                    String errorMessage = "Error " + response.code() + ": " + response.message();
+                    Toast.makeText(AddItemActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<String>> call, Throwable t) {
+                Log.e(TAG, "Failed to load status: " + t.getMessage());
             }
         });
     }

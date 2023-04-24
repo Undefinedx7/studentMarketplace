@@ -99,13 +99,13 @@
                     android:layout_marginRight="8dp" />
 
 
-                <Button
-                    android:id="@+id/upload_button"
+                <Spinner
+                    android:id="@+id/status_spinner"
                     android:layout_width="26dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:backgroundTint="@color/primary"
-                    android:text="Upload"
+                    android:prompt="@string/select_category"
                     android:textColor="@color/on_primary" />
 
             </LinearLayout>

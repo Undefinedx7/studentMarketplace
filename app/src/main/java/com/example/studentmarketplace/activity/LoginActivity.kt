@@ -9,9 +9,11 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.studentmarketplace.AddItemActivity
 import com.example.studentmarketplace.ApiClient
 import com.example.studentmarketplace.ApiClient.ApiResponse
 import com.example.studentmarketplace.ApiClient.ApiResponseListener
+import com.example.studentmarketplace.ForgotPasswordActivity
 import com.example.studentmarketplace.R
 
 class LoginActivity : AppCompatActivity() {
@@ -68,7 +70,7 @@ class LoginActivity : AppCompatActivity() {
                     editor.apply()
 
                     // If login is successful, start MainActivity
-                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                    val intent = Intent(this@LoginActivity, AddItemActivity::class.java)
                     startActivity(intent)
 
 

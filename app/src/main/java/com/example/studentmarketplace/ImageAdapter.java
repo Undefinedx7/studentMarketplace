@@ -40,6 +40,14 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
         return mImageUrls.size();
     }
 
+    public List<String> getImageUrls() {
+        return mImageUrls;
+    }
+
+    public void clearImageUrls() {
+        mImageUrls.clear();
+    }
+
     public class ImageViewHolder extends RecyclerView.ViewHolder {
         public ImageView imageView;
 

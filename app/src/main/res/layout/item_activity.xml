@@ -32,7 +32,12 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:padding="16dp"/>
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Categorie"
+                android:textSize="18sp"
+                android:padding="16dp"/>
             <!-- Item Price -->
             <TextView
                 android:id="@+id/item_price"
@@ -75,6 +80,15 @@
                 android:layout_marginBottom="16dp"/>
 
             <!-- Similar Items -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Seller information"
+                android:textSize="20sp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textColor="@color/primary"/>
+
             <TextView
                 android:id="@+id/similar_items_title"
                 android:layout_width="match_parent"
