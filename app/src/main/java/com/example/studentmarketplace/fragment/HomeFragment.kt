@@ -22,6 +22,13 @@ class HomeFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+
+    // important !!!!
+
+   // Intent intent = new Intent(MainActivity.this, ItemDetailsActivity.class);
+    //intent.putExtra("productId", productId);
+    //startActivity(intent);
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {

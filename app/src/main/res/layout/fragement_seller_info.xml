@@ -44,7 +44,8 @@
             android:id="@+id/contact_seller_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Seller details"/>
+            android:text="Seller details"
+            android:background="@color/primary"/>
 
     </LinearLayout>
 

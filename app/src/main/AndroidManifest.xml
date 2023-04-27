@@ -6,7 +6,10 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
+
     <application
+
+
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -16,6 +19,9 @@
         android:theme="@style/Theme.StudentMarketplace"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
+
+
         <activity
             android:name=".profileActivity"
             android:exported="false"
@@ -62,6 +68,16 @@
             android:name=".ForgotPasswordActivity"
             android:exported="false"
             android:theme="@style/Theme.Design.Light.NoActionBar"></activity>
+        <activity android:name=".ItemDetailsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar"></activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCaZ7KQ3oSEKNKSWVfgV63rU-c1MSMMlZg"/>
+
+
     </application>
+
 
 </manifest>
