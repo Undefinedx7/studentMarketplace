@@ -87,7 +87,7 @@ public class ItemDetailsActivity extends AppCompatActivity implements OnMapReady
 
     }
     private class LoadProductDetailsTask extends AsyncTask<Void, Void, JSONObject> {
-        int productId = 1629040275; //getIntent().getStringExtra("productId");
+        int productId = 735860161; //getIntent().getStringExtra("productId");
 
 
         @Override
@@ -140,19 +140,20 @@ public class ItemDetailsActivity extends AppCompatActivity implements OnMapReady
             }
 
             List<String> imageUrls = new ArrayList<>();
+            imageUrls.clear();
             for (int i = 0; i < imagesJsonArray.length(); i++) {
                 String imageUrl = imagesJsonArray.optString(i);
                 imageUrl = imageUrl.replaceAll("\\\\", "");
                 imageUrl = imageUrl.replaceAll(" ", "");
                 imageUrl = imageUrl.replaceAll("\\\"]", "");
-                imageUrl = imageUrl.replaceAll("\"", ""); // Remove any remaining double quotes
+                imageUrl = imageUrl.replaceAll("\"", "");
                 imageUrls.add(imageUrl);
             }
 
 
 /*
             ImageView imageView = findViewById(R.id.image_view);
-            String imageUrl = "http://college-dev.com/~alae/studentMarket/ressources/upload/img/image-1682511784861-469703986.jpg";
+            String imageUrl = "http://10.0.2.2:8080/studentMarket/ressources/upload/test.jpg";
             Picasso.get().load(imageUrl).into(imageView);
 
 
@@ -200,6 +201,7 @@ public class ItemDetailsActivity extends AppCompatActivity implements OnMapReady
             mapView.onCreate(null);
             mapView.getMapAsync(ItemDetailsActivity.this);
 
+            mAdapter.notifyDataSetChanged();
 
             List<Item> similarItems = new ArrayList<>();
             similarItems.add(new Item("Similar Item 1", "This is a similar item description.", R.drawable.sample_item_image, 39.99, 37.7749, -122.4194));

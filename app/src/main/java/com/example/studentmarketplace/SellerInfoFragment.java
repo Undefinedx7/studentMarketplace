@@ -17,6 +17,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -49,6 +50,7 @@ public class SellerInfoFragment extends Fragment {
         sellerName = rootView.findViewById(R.id.seller_name);
         sellerLocation = rootView.findViewById(R.id.seller_location);
         contactSellerButton = rootView.findViewById(R.id.contact_seller_button);
+
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("seller_id", Context.MODE_PRIVATE);
         String sellerIdStr = String.valueOf(sharedPreferences.getInt("seller_id",0));
@@ -93,11 +95,16 @@ public class SellerInfoFragment extends Fragment {
                                 .load(imageUrl)
                                 .into(sellerProfilePicture);
 */
+                        ImageView imageView = rootView.findViewById(R.id.seller_profile_picture);
+                        String imageUrl = "http://10.0.2.2:8080/studentMarket/ressources/upload/profilePicture/test.jpg";
+
+
                         getActivity().runOnUiThread(() -> {
                             sellerName.setText(username);
                             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
                             sdf.setTimeZone(android.icu.util.TimeZone.getTimeZone("UTC"));
                             try {
+                                Picasso.get().load(imageUrl).into(imageView);
                                 Date date = sdf.parse(createdAt);
                                 SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy");
                                 String year = outputFormat.format(date);
