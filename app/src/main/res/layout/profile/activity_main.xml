@@ -7,8 +7,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_gravity="center"
-    android:background="@drawable/dsbuffer"
-    tools:context=".fragment.profileFragment">
+    android:background="@drawable/background01"
+    tools:context=".MainActivity">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -58,26 +58,9 @@
             android:layout_height="wrap_content">
             <include layout="@layout/item_add"/>
             <include layout="@layout/item_info"/>
+            <include layout="@layout/item_email"/>
 
-            <include
-                layout="@layout/item_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <Button
-                android:id="@+id/register_button"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:background="@color/primary"
-                android:layout_gravity="center"
-                android:text="Log out"
-                android:textColor="@color/backgroundAd"
-                app:shapeAppearanceOverlay="@style/Circular"
-                android:layout_marginTop="40dp"
-                android:elevation="10dp"
-                />
         </LinearLayout>
-
     </ScrollView>
 
 
