@@ -67,7 +67,7 @@ class LoginActivity : AppCompatActivity() {
                     editor.apply()
 
                     // If login is successful, start MainActivity
-                    val intent = Intent(this@LoginActivity, ItemDetailsActivity::class.java)
+                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
                     startActivity(intent)
 
 

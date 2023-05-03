@@ -87,7 +87,7 @@ public class ItemDetailsActivity extends AppCompatActivity implements OnMapReady
 
     }
     private class LoadProductDetailsTask extends AsyncTask<Void, Void, JSONObject> {
-        int productId = 735860161; //getIntent().getStringExtra("productId");
+        int productId = Integer.parseInt(getIntent().getStringExtra("productId")); //735860161;
 
 
         @Override

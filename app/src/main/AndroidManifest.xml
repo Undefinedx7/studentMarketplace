@@ -32,6 +32,10 @@
             android:exported="false"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
+            android:name=".HomeFragment"
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
+        <activity
             android:name=".activity.SplashActivity"
             android:exported="true"
             android:label="Login Screen"

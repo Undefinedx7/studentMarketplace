@@ -11,9 +11,12 @@ public class Product {
     private String category;
     private String userId;
     private String location;
+    private String imageUrl;
+    private String id;
     private List<String> imageUrls;
 
-    public Product(String title, String description, double price, String category, String userId, String location, List<String> imageUrls) {
+    public Product(String id, String title, String description, double price, String category, String userId, String location, List<String> imageUrls) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.price = price;
@@ -22,6 +25,7 @@ public class Product {
         this.location = location;
         this.imageUrls = imageUrls;
     }
+
 
     public String getTitle() {
         return title;
@@ -47,6 +51,8 @@ public class Product {
         return location;
     }
 
+    public String getImageUrl(){return imageUrl;}
+
     public List<String> getImageUrls() {
         return imageUrls;
     }
@@ -54,5 +60,9 @@ public class Product {
     public String toJson() {
         Gson gson = new Gson();
         return gson.toJson(this);
+    }
+
+    public String getId() {
+        return id;
     }
 }
