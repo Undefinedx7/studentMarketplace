@@ -41,6 +41,8 @@ public class SellerInfoFragment extends Fragment {
     private TextView sellerLocation;
     private Button contactSellerButton;
 
+    private String imageUrl;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -89,14 +91,16 @@ public class SellerInfoFragment extends Fragment {
                         JSONObject data = json.getJSONObject("data");
                         String username = data.getString("username");
                         String createdAt = data.getString("created_at");
-                        /*
-                        String imageUrl = json.getString("images");
-                        Glide.with(getActivity())
-                                .load(imageUrl)
-                                .into(sellerProfilePicture);
-*/
+
+                        imageUrl = data.getString("image_urls");
+                        imageUrl = imageUrl.replaceAll("\\\\", "");
+                        imageUrl = imageUrl.replaceAll(" ", "");
+                        imageUrl = imageUrl.replaceAll("\\\"]", "");
+                        imageUrl = imageUrl.replaceAll("\"", "");
+                        imageUrl = imageUrl.replaceAll("\\[", "");
+
                         ImageView imageView = rootView.findViewById(R.id.seller_profile_picture);
-                        String imageUrl = "http://10.0.2.2:8080/studentMarket/ressources/upload/profilePicture/test.jpg";
+                        //String imageUrl = "http://10.0.2.2:8080/studentMarket/ressources/upload/profilePicture/test.jpg";
 
 
                         getActivity().runOnUiThread(() -> {

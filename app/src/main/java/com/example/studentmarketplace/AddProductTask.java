@@ -80,7 +80,7 @@ public class AddProductTask extends AsyncTask<Void, Void, ApiClientCallback.ApiR
         String status = etStatus.getSelectedItem().toString();
         JSONArray imageUrlsJsonArray = new JSONArray();
 
-        // Create a builder for the multipart request body
+
         MultipartBody.Builder builder = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("name", title)
@@ -88,7 +88,7 @@ public class AddProductTask extends AsyncTask<Void, Void, ApiClientCallback.ApiR
                 .addFormDataPart("description", description)
                 .addFormDataPart("category_name", category)
                 .addFormDataPart("status_sell", status)
-                .addFormDataPart("userId", userId)
+                .addFormDataPart("userId", String.valueOf(userId))
                 .addFormDataPart("location", latitude + "," + longitude);
 
         // Add the image files to the builder
