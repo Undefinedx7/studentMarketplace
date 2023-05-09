@@ -18,7 +18,7 @@
         app:contentInsetStartWithNavigation="0dp"
         app:navigationIcon="@drawable/ic_outline_arrow_back_24"
         app:navigationIconTint="@color/gray"
-        tools:title="@string/app_name"
+        tools:title="Titre de la page"
         app:titleTextColor="@color/black" />
 
 

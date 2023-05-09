@@ -17,4 +17,8 @@
         <item name="cornerSize">50%</item>
 
     </style>
+    <style name="Widget.MyTheme.NavigationView" parent="Widget.MaterialComponents.NavigationView">
+        <item name="itemTextAppearance">?attr/textAppearanceBody2</item>
+    </style>
+
 </resources>
