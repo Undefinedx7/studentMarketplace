@@ -2,9 +2,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar_layout" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -14,24 +11,42 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar_layout" />
+
 
             <!-- Item Image -->
+
             <ImageView
                 android:id="@+id/item_image"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/sample_item_image"/>
+                android:src="@drawable/sample_item_image" />
 
-            <!-- Item Title -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/photo_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/toolbar" />
+
+            <TextView
+                android:id="@+id/item_categorie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Categorie"
+                android:textSize="18sp"
+                android:padding="10dp"/>
             <TextView
                 android:id="@+id/item_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Item Title"
-                android:textSize="24sp"
+                android:textColor="@color/mainText"
+                android:textSize="30sp"
                 android:textStyle="bold"
-                android:padding="16dp"/>
+                android:padding="10dp"/>
 
             <!-- Item Price -->
             <TextView
@@ -41,16 +56,104 @@
                 android:text="Item Price"
                 android:textSize="20sp"
                 android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:textColor="@color/primary"/>
+                android:paddingEnd="10dp"
+                android:textColor="@color/primary"
+                android:padding="20dp"/>
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+            >
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="18dp">
+
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_margin="20dp"
+                    android:src="@drawable/baseline_add_alert_24"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Alert"
+                        android:textSize="20sp"
+                        android:paddingStart="25dp"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/primary"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_margin="20dp"
+                    android:src="@drawable/heart_icon_drawable"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Like"
+                    android:textSize="20sp"
+                    android:paddingStart="25dp"
+                    android:paddingEnd="10dp"
+                    android:textColor="@color/primary"/>
+            </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_margin="20dp"
+                    android:src="@drawable/baseline_share_24"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Share"
+                android:textSize="20sp"
+                android:paddingStart="23dp"
+                android:paddingEnd="10dp"
+                android:textColor="@color/primary"/>
+        </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="10dp">
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_margin="20dp"
+                    android:src="@drawable/baseline_send_24"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Send Offer"
+            android:textSize="20sp"
+            android:paddingStart="1dp"
+            android:paddingEnd="1dp"
+            android:textColor="@color/primary"/>
+    </LinearLayout>
+
+            </LinearLayout>
             <!-- Item Description -->
             <TextView
                 android:id="@+id/item_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Item Description"
-                android:textSize="16sp"
+                android:textSize="18sp"
+                android:textColor="@color/mainText"
                 android:padding="16dp"/>
 
             <!-- Item Location -->
@@ -59,7 +162,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Item Location"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
                 android:paddingTop="8dp"
@@ -75,6 +178,22 @@
                 android:layout_marginBottom="16dp"/>
 
             <!-- Similar Items -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Seller information"
+                android:textSize="20sp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textColor="@color/primary"/>
+
+
+            <FrameLayout
+                android:id="@+id/fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+
             <TextView
                 android:id="@+id/similar_items_title"
                 android:layout_width="match_parent"
