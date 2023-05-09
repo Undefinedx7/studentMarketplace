@@ -27,6 +27,7 @@
                 android:layout_marginTop="23dp"
                 android:orientation="vertical">
 
+
                 <TextView
                     android:id="@+id/nameTextView"
                     android:layout_width="match_parent"
@@ -122,5 +123,7 @@
         android:layout_centerHorizontal="true"
         app:shapeAppearanceOverlay="@style/Circular"
         android:layout_width="98dp"
-        android:layout_height="98dp"/>
+        android:layout_height="98dp"
+        android:clickable="true"/>
+
 </RelativeLayout>

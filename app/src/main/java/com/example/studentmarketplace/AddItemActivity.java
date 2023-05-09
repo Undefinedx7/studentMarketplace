@@ -228,21 +228,21 @@ public class AddItemActivity extends AppCompatActivity {
 
 
     private void loadCategories() {
-        // Create instance of ApiService using Retrofit
+
         ApiInterface apiInterface = retrofit.create(ApiInterface.class);
 
-        // Call the API
+
         Call<List<String>> call = apiInterface.getCategories();
         call.enqueue(new retrofit2.Callback<List<String>>() {
             @Override
             public void onResponse(Call<List<String>> call, retrofit2.Response<List<String>> response) {
                 if (response.isSuccessful()) {
-                    // Update spinner with categories data
+
                     ArrayAdapter<String> adapter = new ArrayAdapter<>(AddItemActivity.this,
                             android.R.layout.simple_spinner_dropdown_item, response.body());
                     categorySpinner.setAdapter(adapter);
                 } else {
-                    // Handle error
+
                     String errorMessage = "Error " + response.code() + ": " + response.message();
                     Toast.makeText(AddItemActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
                 }
@@ -257,21 +257,21 @@ public class AddItemActivity extends AppCompatActivity {
     }
 
     private void loadStatus() {
-        // Create instance of ApiService using Retrofit
+
         ApiInterface apiInterface = retrofit.create(ApiInterface.class);
 
-        // Call the API
+
         Call<List<String>> call = apiInterface.getStatus();
         call.enqueue(new retrofit2.Callback<List<String>>() {
             @Override
             public void onResponse(Call<List<String>> call, retrofit2.Response<List<String>> response) {
                 if (response.isSuccessful()) {
-                    // Update spinner with categories data
+
                     ArrayAdapter<String> adapter = new ArrayAdapter<>(AddItemActivity.this,
                             android.R.layout.simple_spinner_dropdown_item, response.body());
                     statusSpinner.setAdapter(adapter);
                 } else {
-                    // Handle error
+
                     String errorMessage = "Error " + response.code() + ": " + response.message();
                     Toast.makeText(AddItemActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
                 }

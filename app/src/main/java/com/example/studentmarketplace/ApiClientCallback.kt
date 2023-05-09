@@ -1,6 +1,6 @@
 package com.example.studentmarketplace
 
-class ApiClientCallback {
+open class ApiClientCallback {
 
     interface ApiResponseListener {
         fun onSuccess(response: ApiResponse)

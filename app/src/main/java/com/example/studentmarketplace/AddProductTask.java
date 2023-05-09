@@ -97,10 +97,10 @@ public class AddProductTask extends AsyncTask<Void, Void, ApiClientCallback.ApiR
                     RequestBody.create(MediaType.parse("image/jpeg"), imageFile));
         }
 
-        // Build the final request body from the builder
+
         RequestBody requestBody = builder.build();
 
-        // Create the request with the final request body
+
         Request request = new Request.Builder()
                 .url(url)
                 .post(requestBody)
