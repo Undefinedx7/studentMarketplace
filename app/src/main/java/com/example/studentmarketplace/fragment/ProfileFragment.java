@@ -65,6 +65,8 @@ public class ProfileFragment extends Fragment {
 
     private TextView nameTextView;
     private TextView emailTextView;
+
+    private TextView postsTextView;
     private TextView phoneTextView;
 
     private Button logoutButton;
@@ -89,6 +91,7 @@ public class ProfileFragment extends Fragment {
         phoneTextView = view.findViewById(R.id.phoneTextView);
         logoutButton = view.findViewById(R.id.logoutButton);
         timeTextView = view.findViewById(R.id.time);
+        postsTextView = view.findViewById(R.id.postsTextView);
 
 
         profileImageView = view.findViewById(R.id.profilePicture);
@@ -130,6 +133,8 @@ public class ProfileFragment extends Fragment {
                         JSONObject data = json.getJSONObject("data");
                         String name = data.getString("username");
                         String email = data.getString("email");
+                        String nbPosts = data.optString("count", "0");
+                        System.out.println(nbPosts);
                         //String phone = data.getString("phone");
                         String createdAt = data.getString("created_at");
                         imageUrlsString = data.getString("image_urls");
@@ -148,6 +153,7 @@ public class ProfileFragment extends Fragment {
                                 updateNameTextView(name);
                                 updateEmailTextView(email);
                                 //updatePhoneTextView(phone);
+                                updatePostsTextView(nbPosts);
                                 ImageView imageView = getView().findViewById(R.id.profilePicture);
                                 String imageUrl = null;
 
@@ -171,6 +177,11 @@ public class ProfileFragment extends Fragment {
                         });
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
+                    }
+                    finally {
+                        if (response.body() != null) {
+                            response.body().close();
+                        }
                     }
                 }
             }
@@ -199,6 +210,10 @@ public class ProfileFragment extends Fragment {
 
     private void updateNameTextView(String name) {
         nameTextView.setText(name);
+    }
+
+    private void updatePostsTextView(String posts) {
+        postsTextView.setText("Posts -" +posts);
     }
 
     private void updateEmailTextView(String email) {

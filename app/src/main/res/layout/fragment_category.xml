@@ -33,6 +33,7 @@
 
         <!-- one -->
         <androidx.cardview.widget.CardView
+            android:id="@+id/category_furniture"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_row="0"
@@ -59,6 +60,7 @@
                     />
 
                 <TextView
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Furniture"
@@ -70,6 +72,7 @@
 
 <!-- 2 -->
         <androidx.cardview.widget.CardView
+            android:id="@+id/category_rentals"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_row="1"
@@ -106,6 +109,7 @@
 
         <!-- 3 -->
         <androidx.cardview.widget.CardView
+            android:id="@+id/category_electronics"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_row="2"
@@ -130,6 +134,7 @@
                     android:layout_marginRight="20dp"
                     android:src="@drawable/baseline_phone_android_24"/>
                 <TextView
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Electronics"
@@ -349,15 +354,7 @@
                         android:textSize="20sp"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="All Categories"
-                android:layout_marginLeft="20dp"
-                android:textColor="@color/mainText"
-                android:textSize="30sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+           
             <!-- one -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"

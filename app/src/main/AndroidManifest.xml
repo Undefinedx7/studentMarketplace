@@ -77,6 +77,8 @@
         <activity android:name=".ItemDetailsActivity"
             android:exported="false"
             android:theme="@style/Theme.Design.Light.NoActionBar"></activity>
+        <activity android:name=".DisplayProductList"
+            android:exported="false"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

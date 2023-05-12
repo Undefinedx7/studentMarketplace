@@ -27,9 +27,9 @@ import okhttp3.Response;
 
 public class HomeFragment extends Fragment {
 
-        private RecyclerView todayRecView, propertyRecView;
-        private List<Product> productList, logementProductList ;
-        private ProductAdapter adapterToday, adapterProperty;
+        private RecyclerView todayRecView, propertyRecView, electronicsRecView, bookRecView;
+        private List<Product> productList, logementProductList, electronicsList, booksList;
+        private ProductAdapter adapterToday, adapterProperty, adapterElectronics, adapterBooks;
         private OkHttpClient client;
 
         public HomeFragment() {
@@ -43,6 +43,8 @@ public class HomeFragment extends Fragment {
 
             todayRecView = view.findViewById(R.id.todayRecView);
             propertyRecView = view.findViewById(R.id.propertyRecView);
+            electronicsRecView = view.findViewById(R.id.electronicsRecView);
+            bookRecView = view.findViewById(R.id.bookRecView);
 
             LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
             todayRecView.setLayoutManager(layoutManager);
@@ -51,10 +53,18 @@ public class HomeFragment extends Fragment {
 
             productList = new ArrayList<>();
             logementProductList  = new ArrayList<>();
+            electronicsList = new ArrayList<>();
+            booksList = new ArrayList<>();
+            
             adapterToday = new ProductAdapter(getActivity(), productList);
-            adapterProperty = new ProductAdapter(getActivity(), logementProductList );
+            adapterProperty = new ProductAdapter(getActivity(), logementProductList);
+            adapterElectronics = new ProductAdapter(getActivity(), electronicsList);
+            adapterBooks = new ProductAdapter(getActivity(), booksList);
+            
             todayRecView.setAdapter(adapterToday);
             propertyRecView.setAdapter(adapterProperty);
+            electronicsRecView.setAdapter(adapterElectronics);
+            bookRecView.setAdapter(adapterBooks);
 
             client = new OkHttpClient();
 
@@ -83,6 +93,8 @@ public class HomeFragment extends Fragment {
                         try {
                             List<Product> productList = new ArrayList<>();
                             List<Product> logementProductList = new ArrayList<>();
+                            List<Product> bookProductList = new ArrayList<>();
+                            List<Product> electronicsProductList = new ArrayList<>();
 
                             JSONObject responseObject = new JSONObject(response.body().string());
                             JSONArray jsonArray = responseObject.getJSONArray("data");
@@ -111,8 +123,12 @@ public class HomeFragment extends Fragment {
                                 }
                                 Product product = new Product(id, title, description, price, category, userId, location, imageUrls);
                                 productList.add(product);
-                                if (category.equals("Logement")) {
+                                if (category.equals("Rentals")) {
                                     logementProductList.add(product);
+                                } else if (category.equals("Books")) {
+                                    bookProductList.add(product);
+                                } else if (category.equals("Electronics")) {
+                                    electronicsProductList.add(product);
                                 }
 
                             }
@@ -122,6 +138,8 @@ public class HomeFragment extends Fragment {
                                 public void run() {
                                     adapterToday.setProductList(productList);
                                     adapterProperty.setProductList(logementProductList );
+                                    adapterElectronics.setProductList(electronicsProductList);
+                                    adapterBooks.setProductList(bookProductList);
                                 }
                             });
 

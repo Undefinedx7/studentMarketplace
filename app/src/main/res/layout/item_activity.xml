@@ -1,11 +1,6 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar_layout" />
 
 
     <ScrollView
@@ -16,68 +11,166 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/image_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="centerCrop" />
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar_layout" />
 
 
             <!-- Item Image -->
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/photo_recycler_view"
-                android:layout_width="match_parent"
+                android:layout_width="400dp"
                 android:layout_height="match_parent"
                 android:layout_above="@id/toolbar" />
 
-            <TextView
-                android:id="@+id/item_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Item Title"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:padding="16dp"/>
             <TextView
                 android:id="@+id/item_categorie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Categorie"
                 android:textSize="18sp"
-                android:padding="16dp"/>
+                android:padding="5dp"/>
+            <TextView
+                android:id="@+id/item_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Item Title"
+                android:textColor="@color/mainText"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:padding="5dp"/>
+
             <!-- Item Price -->
             <TextView
                 android:id="@+id/item_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Item Price"
-                android:textSize="20sp"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:textColor="@color/primary"/>
+                android:textSize="23sp"
+                android:paddingStart="5dp"
+                android:paddingEnd="10dp"
+                android:textColor="@color/mainText"
+                android:padding="5dp"/>
+            <TextView
 
-            <!-- Item Description -->
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Description"
+                android:textSize="20sp"
+                android:textColor="@color/mainText"
+                android:textStyle="bold"
+                android:padding="5dp"/>
             <TextView
                 android:id="@+id/item_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Item Description"
-                android:textSize="16sp"
-                android:padding="16dp"/>
+                android:textSize="18sp"
+                android:textColor="@color/mainText"
+                android:padding="5dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="0dp"
+            >
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="28dp">
+
+
+                <ImageView
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:layout_margin="0dp"
+                    android:src="@drawable/baseline_add_alert_24"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Alert"
+                        android:textSize="20sp"
+                        android:paddingStart="1dp"
+                        android:paddingEnd="30dp"
+                        android:textColor="@color/primary"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:layout_margin="0dp"
+                    android:src="@drawable/heart_icon_drawable"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Like"
+                    android:textSize="20sp"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="20dp"
+                    android:textColor="@color/primary"/>
+            </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="18dp">
+
+                <ImageView
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:layout_margin="0dp"
+                    android:src="@drawable/baseline_share_24"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Share"
+                android:textSize="20sp"
+                android:paddingStart="1dp"
+                android:paddingEnd="20dp"
+                android:textColor="@color/primary"/>
+        </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="15dp">
+                <ImageView
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:layout_margin="0dp"
+                    android:src="@drawable/baseline_send_24"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Offer"
+            android:textSize="20sp"
+            android:paddingStart="1dp"
+            android:paddingEnd="20dp"
+            android:textColor="@color/primary"/>
+    </LinearLayout>
+
+            </LinearLayout>
+
 
             <!-- Item Location -->
             <TextView
                 android:id="@+id/item_location"
-                android:layout_width="match_parent"
+                android:layout_width="420dp"
                 android:layout_height="wrap_content"
-                android:text="Item Location"
-                android:textSize="16sp"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
+                android:paddingStart="5dp"
                 android:paddingTop="8dp"
+                android:paddingEnd="16dp"
                 android:paddingBottom="8dp"
-                android:textColor="@color/primary"/>
+                android:text="Item Location"
+                android:textColor="@color/mainText"
+                android:textSize="20sp" />
 
             <!-- Map View -->
             <com.google.android.gms.maps.MapView
@@ -103,20 +196,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
-
-            <TextView
-                android:id="@+id/similar_items_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Similar Items"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:padding="16dp"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/similar_items_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
 
         </LinearLayout>
 

@@ -81,7 +81,7 @@ public class ItemDetailsActivity extends AppCompatActivity implements OnMapReady
         itemDescription = findViewById(R.id.item_description);
         itemLocation = findViewById(R.id.item_location);
         mapView = findViewById(R.id.map_view);
-        similarItemsRecyclerView = findViewById(R.id.similar_items_recycler_view);
+        //similarItemsRecyclerView = findViewById(R.id.similar_items_recycler_view);
 
         new LoadProductDetailsTask().execute();
 
@@ -150,14 +150,6 @@ public class ItemDetailsActivity extends AppCompatActivity implements OnMapReady
                 imageUrls.add(imageUrl);
             }
 
-
-/*
-            ImageView imageView = findViewById(R.id.image_view);
-            String imageUrl = "http://10.0.2.2:8080/studentMarket/ressources/upload/test.jpg";
-            Picasso.get().load(imageUrl).into(imageView);
-
-
-*/
             RecyclerView mRecyclerView = findViewById(R.id.photo_recycler_view);
             mRecyclerView.setHasFixedSize(true);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(ItemDetailsActivity.this));
@@ -202,14 +194,16 @@ public class ItemDetailsActivity extends AppCompatActivity implements OnMapReady
             mapView.getMapAsync(ItemDetailsActivity.this);
 
             mAdapter.notifyDataSetChanged();
-
+/*
             List<Item> similarItems = new ArrayList<>();
             similarItems.add(new Item("Similar Item 1", "This is a similar item description.", R.drawable.sample_item_image, 39.99, 37.7749, -122.4194));
             similarItems.add(new Item("Similar Item 2", "This is another similar item description.", R.drawable.sample_item_image, 59.99, 37.7749, -122.4194));
             LinearLayoutManager layoutManager = new LinearLayoutManager(ItemDetailsActivity.this, LinearLayoutManager.HORIZONTAL, false);
-            similarItemsRecyclerView.setLayoutManager(layoutManager);
+            //similarItemsRecyclerView.setLayoutManager(layoutManager);
             //ItemAdapter adapter = new ItemAdapter(similarItems);
             //similarItemsRecyclerView.setAdapter(adapter);
+            */
+
         }
 
 
