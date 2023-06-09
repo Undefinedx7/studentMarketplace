@@ -209,12 +209,12 @@
                     android:textSize="25sp"/>
 
                 <TextView
-                    android:id="@+id/clothing_ViewAll"
+                    android:id="@+id/books_ViewAll"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="260dp"
                     android:gravity="center"
                     android:text="View all"
-                    android:layout_marginLeft="50dp"
                     android:textColor="@color/mainText"
                     android:textSize="12sp" />
 

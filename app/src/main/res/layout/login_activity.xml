@@ -186,7 +186,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_margin="20dp"
-                android:src="@drawable/btn_google_signin_light_normal_hdpi"/>
+                android:src="@drawable/btn_google_light_normal_hdpi"/>
             <ImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp"

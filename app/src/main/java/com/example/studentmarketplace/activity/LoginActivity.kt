@@ -21,7 +21,7 @@ class LoginActivity : AppCompatActivity() {
     // private lateinit var mforgottenPassTv : TextView
 
     fun onSignUpClick(view: View?) {
-        // Handle sign up click event here
+
         val intent = Intent(this, SignUpActivity::class.java)
         startActivity(intent)
     }
@@ -36,7 +36,7 @@ class LoginActivity : AppCompatActivity() {
         mLoginButton = findViewById(R.id.login_button)
         val mForgottenPassTv: TextView = findViewById(R.id.forgottenPassTv)
 
-        // Set click listener for "Forgotten Password" button
+
         mForgottenPassTv.setOnClickListener {
             val intent = Intent(this@LoginActivity, ForgotPasswordActivity::class.java)
             startActivity(intent)
@@ -66,7 +66,7 @@ class LoginActivity : AppCompatActivity() {
                     editor.putString("id", response.id.toString())
                     editor.apply()
 
-                    // If login is successful, start MainActivity
+
                     val intent = Intent(this@LoginActivity, MainActivity::class.java)
                     startActivity(intent)
 

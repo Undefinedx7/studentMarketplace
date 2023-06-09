@@ -1,10 +1,12 @@
 package com.example.studentmarketplace;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -33,7 +35,7 @@ public class HomeFragment extends Fragment {
         private OkHttpClient client;
 
         public HomeFragment() {
-            // Required empty public constructor
+
         }
 
         @Override
@@ -66,6 +68,45 @@ public class HomeFragment extends Fragment {
             electronicsRecView.setAdapter(adapterElectronics);
             bookRecView.setAdapter(adapterBooks);
 
+            TextView all = view.findViewById(R.id.today_GroupViewAll);
+            all.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), DisplayProductList.class);
+                    intent.putExtra("category", "");
+                    startActivity(intent);
+                }
+            });
+
+            TextView books = view.findViewById(R.id.books_ViewAll);
+            books.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), DisplayProductList.class);
+                    intent.putExtra("category", "Books");
+                    startActivity(intent);
+                }
+            });
+
+            TextView electronics = view.findViewById(R.id.electronics_ViewAll);
+            electronics.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), DisplayProductList.class);
+                    intent.putExtra("category", "Electronics");
+                    startActivity(intent);
+                }
+            });
+
+            TextView rentals = view.findViewById(R.id.property_ViewAll);
+            rentals.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), DisplayProductList.class);
+                    intent.putExtra("category", "Rentals");
+                    startActivity(intent);
+                }
+            });
             client = new OkHttpClient();
 
             fetchProducts();

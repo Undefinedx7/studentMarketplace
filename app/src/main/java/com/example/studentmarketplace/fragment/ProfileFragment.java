@@ -155,7 +155,6 @@ public class ProfileFragment extends Fragment {
                                 //updatePhoneTextView(phone);
                                 updatePostsTextView(nbPosts);
                                 ImageView imageView = getView().findViewById(R.id.profilePicture);
-                                String imageUrl = null;
 
                                 Date date = null;
                                 try {
@@ -191,12 +190,12 @@ public class ProfileFragment extends Fragment {
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Remove user ID from shared preferences
+
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.remove("id");
                 editor.apply();
 
-                // Redirect user to login screen
+
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);
                 getActivity().finish();

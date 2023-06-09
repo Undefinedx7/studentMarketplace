@@ -127,7 +127,7 @@ public class SellerInfoFragment extends Fragment {
                         e.printStackTrace();
                     }
                 } else {
-                    // Handle unsuccessful response
+
                     String error = response.body().string();
                     Log.d("SellerInfoFragment", "Error: " + error);
                 }

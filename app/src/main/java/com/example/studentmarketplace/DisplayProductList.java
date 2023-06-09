@@ -116,7 +116,6 @@ public class DisplayProductList extends AppCompatActivity {
                             productList.add(product);
                         }
 
-                        // Update UI on the main thread
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
