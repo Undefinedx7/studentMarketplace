@@ -26,7 +26,7 @@ The Student Marketplace App is a mobile application that provides a platform for
 
 ## Video Demo
 
-[![Demo Video]()](https://icaddy.ma/studentMarket/ressources/upload/StudentMarket.mp4)
+[![Demo Video](https://icaddy.ma/studentMarket/ressources/upload/StudentMarket.mp4)](https://icaddy.ma/studentMarket/ressources/upload/StudentMarket.mp4)
 
 
 
